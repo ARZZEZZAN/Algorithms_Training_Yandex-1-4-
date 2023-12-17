@@ -8,18 +8,30 @@ public class MoreNeighbours {
         Scanner sScanner = new Scanner(System.in);
 
         ArrayList<Integer> nums = new ArrayList<>();
-        int count = sScanner.nextInt();
-        while (count > 0) {
-            nums.add(sScanner.nextInt());
-            count--;
-        }
-        int x = sScanner.nextInt();
+        String input = sScanner.nextLine();
+        String[] output = input.split(" ");
 
-        System.out.println(moreNeighbours(nums, x));
+        for(String s : output) {
+            nums.add(Integer.parseInt(s));
+        }
+
+        System.out.println(moreNeighbours(nums));
 
     }
 
     public static int moreNeighbours(ArrayList<Integer> nums) {
-       return 0;
+        if (nums.size() < 3) {
+            return 0;
+        }
+
+        int result = 0;
+
+        for (int i = 1; i < nums.size() - 1; i++) {
+            if(nums.get(i-1) < nums.get(i) && nums.get(i+1) < nums.get(i)) {
+                result++;
+            }
+        }
+
+       return result;
     }
 }
