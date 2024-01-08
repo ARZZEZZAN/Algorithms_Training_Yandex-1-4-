@@ -20,11 +20,12 @@ public class GreatestMultiplication {
     }
 
     public static void greatestMultiplication(ArrayList<Integer> nums) {
+        Collections.sort(nums);
+
         if (nums.size() <= 2) {
             printAnswer(nums);
+            return;
         }
-
-        Collections.sort(nums);
 
         long resultPlus = 0;
         long resultMinus = 0;
