@@ -2,14 +2,7 @@ package Homework02;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.concurrent.atomic.AtomicReferenceArray;
-import java.util.stream.Collectors;
-
-import com.sun.source.tree.Tree;
 
 public class GreatestMultiplication {
     public static void main(String[] args) throws Exception {
@@ -18,13 +11,47 @@ public class GreatestMultiplication {
         String input = sScanner.nextLine();
         String[] numsLine = input.split(" ");
 
-        greatestMultiplication(numsLine, 2);
+        ArrayList<Integer> nums = new ArrayList<>();
+        for (String element : numsLine) {
+            nums.add(Integer.parseInt(element));
+        }
+
+        greatestMultiplication(nums);
     }
 
-    public static void greatestMultiplication(String[] numsLine, int amount) {
-       for (String element : numsLine) {
+    public static void greatestMultiplication(ArrayList<Integer> nums) {
+        if (nums.size() <= 2) {
+            printAnswer(nums);
+        }
 
-       }
+        Collections.sort(nums);
+
+        long resultPlus = 0;
+        long resultMinus = 0;
+        ArrayList<Integer> result = new ArrayList<>(2);
+
+        int lastIndex = nums.size() - 1;
+        resultPlus = Math.multiplyExact(Long.valueOf(nums.get(lastIndex)), Long.valueOf(nums.get(lastIndex - 1)));
+        resultMinus = Math.multiplyExact(Long.valueOf(nums.get(0)), Long.valueOf(nums.get(1)));
+
+        if (resultPlus > resultMinus) {
+            result.add(nums.get(lastIndex - 1));
+            result.add(nums.get(lastIndex));
+        } else {
+            result.add(nums.get(0));
+            result.add(nums.get(1));
+        }
+
+        printAnswer(result);
+    }
+    public static void printAnswer(ArrayList<Integer> nums) {
+        for (int i = 0; i < nums.size(); i++) {
+            if (i != nums.size() - 1) {
+                System.out.print(nums.get(i) + " ");
+            } else {
+                System.out.println(nums.get(i));
+            }
+        }
     }
 
 }
