@@ -1,30 +1,34 @@
-package Homework3;
+package Homework03;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class IntersectionOfSets {
     public static void main(String[] args) throws Exception {
         Scanner sScanner = new Scanner(System.in);
 
-        HashMap<Integer, Integer> numbers = new HashMap<>();
+        Set<Integer> numbers = new TreeSet<>();
         ArrayList<Integer> result = new ArrayList<>();
 
         String input = sScanner.nextLine();
         for (String num : input.split(" ")) {
-            numbers.put(Integer.valueOf(num), 1);
+            numbers.add(Integer.valueOf(num));
         }
 
         String input1 = sScanner.nextLine();
         for (String num : input1.split(" ")) {
-            Integer key = Integer.valueOf(num);
-            Integer value = numbers.compute(key, (k, v) -> v != null ? v + 1 : null);
-            if (value != null && value > 1) {
-                result.add(key);
+            Integer value = Integer.valueOf(num);
+            if (!numbers.add(Integer.valueOf(num))) {
+                result.add(value);
             }
         }
 
+        Collections.sort(result);
         result.forEach(str -> System.out.print(str + " "));
     }
 }

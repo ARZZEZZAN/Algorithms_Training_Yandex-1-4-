@@ -1,4 +1,4 @@
-package Homework3;
+package Homework03;
 
 import java.util.HashMap;
 import java.util.Scanner;
